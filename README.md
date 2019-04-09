@@ -8,6 +8,8 @@
 
 > Split object for [Kakoune].
 
+[![asciicast](https://asciinema.org/a/239870.svg)](https://asciinema.org/a/239870)
+
 ## Installation
 
 ### [Pathogen]
