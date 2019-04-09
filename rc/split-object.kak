@@ -5,7 +5,7 @@ declare-user-mode split-object
 
 define-command -hidden split-object -params 3 %{
   unset-option window split_object_selections
-  evaluate-commands -no-hooks -draft -itersel -save-regs '/' %{
+  evaluate-commands -no-hooks -draft -itersel -save-regs '/' %{ try %{
     set-register / "\Q%arg(2)\E|\Q%arg(3)\E"
     # Abort if nothing to select
     try %{
@@ -33,8 +33,12 @@ define-command -hidden split-object -params 3 %{
     # Execute the object command
     execute-keys "l<a-i>%arg(1)"
     evaluate-commands set-option -add window split_object_selections %val(selections_desc)
+  }}
+  try %{
+    select %opt(split_object_selections)
+  } catch %{
+    fail 'Nothing selected'
   }
-  select %opt(split_object_selections)
 }
 
 map global split-object b ': split-object b ( )<ret>' -docstring 'Parenthesis block'
