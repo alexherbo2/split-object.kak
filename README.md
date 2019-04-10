@@ -3,6 +3,7 @@
 **Status** – _Maintained_ – Until [#138]
 
 [![IRC][IRC Badge]][IRC]
+[![Discuss][Discuss Badge]][Discuss]
 
 ###### [Usage](#usage) | [Documentation](#modes) | [Contributing](CONTRIBUTING)
 
@@ -43,4 +44,6 @@ map global normal <a-I> ': enter-user-mode split-object<ret>'
 [Kakoune]: https://kakoune.org
 [IRC]: https://webchat.freenode.net?channels=kakoune
 [IRC Badge]: https://img.shields.io/badge/IRC-%23kakoune-blue.svg
+[Discuss]: https://discuss.kakoune.com/t/ability-to-split-object-selections/442
+[Discuss Badge]: https://img.shields.io/badge/Discuss-442-green.svg
 [Pathogen]: https://github.com/alexherbo2/pathogen.kak
