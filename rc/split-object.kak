@@ -44,11 +44,14 @@ define-command -hidden split-object -params 3 %{
 define-command -hidden split-object-custom %{
   info -title 'Enter object description' 'Format: <open-regex>,<close-regex> (escape commas with ''\'')'
   prompt 'Object description:' %{
+    info # clear
     evaluate-commands -save-regs 'CO' %{
       set-register O %sh(printf '%s' "${kak_text%,*}")
       set-register C %sh(printf '%s' "${kak_text#*,}")
       split-object "c%val(text)<ret>" "\E%reg(O)\Q" "\E%reg(C)\Q"
     }
+  } -on-abort %{
+    info # clear
   }
 }
 
