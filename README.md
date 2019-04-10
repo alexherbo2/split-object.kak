@@ -37,6 +37,7 @@ map global normal <a-I> ': enter-user-mode split-object<ret>'
 - `Q`, `"`: Double quote string
 - `q`, `'`: Single quote string
 - `g`, `` ` ``: Grave quote string
+- `c`: Custom object description
 
 [#138]: https://github.com/mawww/kakoune/issues/138
 [Kakoune]: https://kakoune.org
