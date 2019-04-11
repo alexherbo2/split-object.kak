@@ -3,12 +3,12 @@ declare-option -hidden str-list split_object_openers
 
 declare-user-mode split-object
 
-define-command -hidden split-object -params 3 %{
+define-command -hidden split-object -params 2 %{
   unset-option window split_object_selections
   evaluate-commands -no-hooks -draft -itersel -save-regs '/P' %{ try %{
     # Save parent selection
     set-register P %val(selection_desc)
-    set-register / "\Q%arg(2)\E|\Q%arg(3)\E"
+    set-register / %arg(2)
     # Abort if nothing to select
     try %{
       execute-keys 's<ret>'
@@ -78,36 +78,36 @@ define-command -hidden split-object-custom %{
     evaluate-commands -save-regs 'CO' %{
       set-register O %sh(printf '%s' "${kak_text%,*}")
       set-register C %sh(printf '%s' "${kak_text#*,}")
-      split-object "c%val(text)<ret>" "\E%reg(O)\Q" "\E%reg(C)\Q"
+      split-object "c%val(text)<ret>" "%reg(O)|%reg(C)"
     }
   } -on-abort %{
     info # clear
   }
 }
 
-map global split-object b ': split-object b ( )<ret>' -docstring 'Parenthesis block'
-map global split-object ( ': split-object b ( )<ret>' -docstring 'Parenthesis block'
-map global split-object ) ': split-object b ( )<ret>' -docstring 'Parenthesis block'
+map global split-object b ': split-object b [()]<ret>' -docstring 'Parenthesis block'
+map global split-object ( ': split-object b [()]<ret>' -docstring 'Parenthesis block'
+map global split-object ) ': split-object b [()]<ret>' -docstring 'Parenthesis block'
 
-map global split-object B ': split-object B { }<ret>' -docstring 'Braces block'
-map global split-object { ': split-object B { }<ret>' -docstring 'Braces block'
-map global split-object } ': split-object B { }<ret>' -docstring 'Braces block'
+map global split-object B ': split-object B [{}]<ret>' -docstring 'Braces block'
+map global split-object { ': split-object B [{}]<ret>' -docstring 'Braces block'
+map global split-object } ': split-object B [{}]<ret>' -docstring 'Braces block'
 
-map global split-object r ': split-object r [ ]<ret>' -docstring 'Brackets block'
-map global split-object [ ': split-object r [ ]<ret>' -docstring 'Brackets block'
-map global split-object ] ': split-object r [ ]<ret>' -docstring 'Brackets block'
+map global split-object r ': split-object r [\[\]]<ret>' -docstring 'Brackets block'
+map global split-object [ ': split-object r [\[\]]<ret>' -docstring 'Brackets block'
+map global split-object ] ': split-object r [\[\]]<ret>' -docstring 'Brackets block'
 
-map global split-object a ': split-object a <lt> <gt><ret>' -docstring 'Angle block'
-map global split-object <lt> ': split-object a <lt> <gt><ret>' -docstring 'Angle block'
-map global split-object <gt> ': split-object a <lt> <gt><ret>' -docstring 'Angle block'
+map global split-object a ': split-object a [<lt><gt>]<ret>' -docstring 'Angle block'
+map global split-object <lt> ': split-object a [<lt><gt>]<ret>' -docstring 'Angle block'
+map global split-object <gt> ': split-object a [<lt><gt>]<ret>' -docstring 'Angle block'
 
-map global split-object Q ': split-object Q %(") %(")<ret>' -docstring 'Double quote string'
-map global split-object '"' ': split-object Q %(") %(")<ret>' -docstring 'Double quote string'
+map global split-object Q ': split-object Q %(")<ret>' -docstring 'Double quote string'
+map global split-object '"' ': split-object Q %(")<ret>' -docstring 'Double quote string'
 
-map global split-object q ': split-object q %('') %('')<ret>' -docstring 'Single quote string'
-map global split-object "'" ': split-object q %('') %('')<ret>' -docstring 'Single quote string'
+map global split-object q ': split-object q %('')<ret>' -docstring 'Single quote string'
+map global split-object "'" ': split-object q %('')<ret>' -docstring 'Single quote string'
 
-map global split-object g ': split-object g ` `<ret>' -docstring 'Grave quote string'
-map global split-object ` ': split-object g ` `<ret>' -docstring 'Grave quote string'
+map global split-object g ': split-object g `<ret>' -docstring 'Grave quote string'
+map global split-object ` ': split-object g `<ret>' -docstring 'Grave quote string'
 
 map global split-object c ': split-object-custom<ret>' -docstring 'Custom object description'
