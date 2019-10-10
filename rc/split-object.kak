@@ -1,5 +1,5 @@
 declare-option -hidden str-list split_object_selections
-declare-option -hidden str-list split_object_openers
+declare-option -hidden str split_object_close
 
 declare-user-mode split-object
 
@@ -28,31 +28,44 @@ define-command -hidden split-object-implementation -params 3 %{
     # Execute the object command
     # Discard selections expanding
     evaluate-commands -itersel -draft %{
-      execute-keys "<a-i>%arg(2)"
-      evaluate-commands %sh{
-        # Parent selection
-        parent_anchor=${kak_main_reg_P%,*}
-        parent_anchor_line=${parent_anchor%.*}
-        parent_anchor_column=${parent_anchor#*.}
-        parent_cursor=${kak_main_reg_P#*,}
-        parent_cursor_line=${parent_cursor%.*}
-        parent_cursor_column=${parent_cursor#*.}
-        anchor=${kak_selection_desc%,*}
-        anchor_line=${anchor%.*}
-        anchor_column=${anchor#*.}
-        cursor=${kak_selection_desc#*,}
-        cursor_line=${cursor%.*}
-        cursor_column=${cursor#*.}
-        if test "$anchor_line" -lt "$parent_anchor_line"; then
-          exit
-        elif test "$anchor_line" -eq "$parent_anchor_line" -a "$anchor_column" -lt "$parent_anchor_column"; then
-          exit
-        elif test "$cursor_line" -gt "$parent_cursor_line"; then
-          exit
-        elif test "$cursor_line" -eq "$parent_cursor_line" -a "$cursor_column" -gt "$parent_cursor_column"; then
-          exit
-        fi
-        printf 'set-option -add window split_object_selections %s\n' "$kak_selection_desc"
+	  try %{
+        evaluate-commands %sh{
+          if [ "$kak_opt_split_object_close" ]; then
+            if [ "$kak_selection_desc" == "$kak_opt_split_object_close" ]; then
+              printf 'set-option window split_object_close ""\n'
+            fi
+            exit
+          fi
+          printf 'execute-keys "<a-i>%s"\n' '%arg(2)'
+          printf 'fail "trigger next step"'
+        }
+	  } catch %{
+        evaluate-commands %sh{
+          # Parent selection
+          parent_anchor=${kak_main_reg_P%,*}
+          parent_anchor_line=${parent_anchor%.*}
+          parent_anchor_column=${parent_anchor#*.}
+          parent_cursor=${kak_main_reg_P#*,}
+          parent_cursor_line=${parent_cursor%.*}
+          parent_cursor_column=${parent_cursor#*.}
+          anchor=${kak_selection_desc%,*}
+          anchor_line=${anchor%.*}
+          anchor_column=${anchor#*.}
+          cursor=${kak_selection_desc#*,}
+          cursor_line=${cursor%.*}
+          cursor_column=${cursor#*.}
+          if test "$anchor_line" -lt "$parent_anchor_line"; then
+            exit
+          elif test "$anchor_line" -eq "$parent_anchor_line" -a "$anchor_column" -lt "$parent_anchor_column"; then
+            exit
+          elif test "$cursor_line" -gt "$parent_cursor_line"; then
+            exit
+          elif test "$cursor_line" -eq "$parent_cursor_line" -a "$cursor_column" -gt "$parent_cursor_column"; then
+            exit
+          fi
+          printf 'set-option -add window split_object_selections %s\n' "$kak_selection_desc"
+          printf 'exec ";/<ret>"\nset-option window split_object_close %s\n' "%val{selection_desc}"
+        }
       }
 	}  }}
   try %{
