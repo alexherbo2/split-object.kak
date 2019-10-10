@@ -25,47 +25,22 @@ define-command -hidden split-object-implementation -params 3 %{
     }
     # Rotate to set the index of the main selection to 1
     execute-keys ')'
-    # Switch for balanced objects
-    # 'nop' → non balanced objects
-    # 'fail' → balanced objects
-    try %{
-      evaluate-commands %arg(1)
-    } catch %{
-      unset-option window split_object_openers
-      evaluate-commands %sh{
-        eval "set -- $kak_selections_desc"
-        # Abort if unbalanced selections
-        if test $(($# % 2)) -ne 0; then
-          printf 'fail Unbalanced selections\n'
-        fi
-        # Select openers and skip closers
-        while test $# -ge 2; do
-          printf 'set-option -add window split_object_openers %s\n' "$1"
-          shift 2
-        done
-      }
-      # Select openers
-      select %opt(split_object_openers)
-      # Position the cursor
-      execute-keys 'l'
-    }
     # Execute the object command
-    execute-keys "<a-i>%arg(2)"
     # Discard selections expanding
-    evaluate-commands %sh{
-      # Parent selection
-      parent_anchor=${kak_main_reg_P%,*}
-      parent_anchor_line=${parent_anchor%.*}
-      parent_anchor_column=${parent_anchor#*.}
-      parent_cursor=${kak_main_reg_P#*,}
-      parent_cursor_line=${parent_cursor%.*}
-      parent_cursor_column=${parent_cursor#*.}
-      eval "set -- $kak_selections_desc"
-      for selection do
-        anchor=${selection%,*}
+    evaluate-commands -itersel -draft %{
+      execute-keys "<a-i>%arg(2)"
+      evaluate-commands %sh{
+        # Parent selection
+        parent_anchor=${kak_main_reg_P%,*}
+        parent_anchor_line=${parent_anchor%.*}
+        parent_anchor_column=${parent_anchor#*.}
+        parent_cursor=${kak_main_reg_P#*,}
+        parent_cursor_line=${parent_cursor%.*}
+        parent_cursor_column=${parent_cursor#*.}
+        anchor=${kak_selection_desc%,*}
         anchor_line=${anchor%.*}
         anchor_column=${anchor#*.}
-        cursor=${selection#*,}
+        cursor=${kak_selection_desc#*,}
         cursor_line=${cursor%.*}
         cursor_column=${cursor#*.}
         if test "$anchor_line" -lt "$parent_anchor_line"; then
@@ -77,10 +52,9 @@ define-command -hidden split-object-implementation -params 3 %{
         elif test "$cursor_line" -eq "$parent_cursor_line" -a "$cursor_column" -gt "$parent_cursor_column"; then
           exit
         fi
-        printf 'set-option -add window split_object_selections %s\n' "$selection"
-      done
-    }
-  }}
+        printf 'set-option -add window split_object_selections %s\n' "$kak_selection_desc"
+      }
+	}  }}
   try %{
     select %opt(split_object_selections)
   } catch %{
