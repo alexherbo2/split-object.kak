@@ -4,19 +4,11 @@ declare-option -hidden str split_object_close
 declare-user-mode split-object
 
 define-command -hidden split-object -params 2 %{
-  split-object-implementation nop %arg(1) %arg(2)
-}
-
-define-command -hidden split-object-balanced -params 2 %{
-  split-object-implementation fail %arg(1) %arg(2)
-}
-
-define-command -hidden split-object-implementation -params 3 %{
   unset-option window split_object_selections
   evaluate-commands -no-hooks -draft -itersel -save-regs '/P' %{ try %{
     # Save parent selection
     set-register P %val(selection_desc)
-    set-register / %arg(3)
+    set-register / %arg(2)
     # Abort if nothing to select
     try %{
       execute-keys 's<ret>'
@@ -36,7 +28,7 @@ define-command -hidden split-object-implementation -params 3 %{
             fi
             exit
           fi
-          printf 'execute-keys "<a-i>%s"\n' '%arg(2)'
+          printf 'execute-keys "<a-i>%s"\n' '%arg(1)'
           printf 'fail "trigger next step"'
         }
 	  } catch %{
@@ -64,7 +56,7 @@ define-command -hidden split-object-implementation -params 3 %{
             exit
           fi
           printf 'set-option -add window split_object_selections %s\n' "$kak_selection_desc"
-          [ "$2" == 's' ] || [ "$2" == 'p' ] || [ "$2" == 'w' ] || [ "$2" == '<lt>a-w<gt>' ] && exit
+          [ "$1" == 's' ] || [ "$1" == 'p' ] || [ "$1" == 'w' ] || [ "$1" == '<lt>a-w<gt>' ] && exit
           printf 'exec ";/<ret>"\nset-option window split_object_close %s\n' "%val{selection_desc}"
         }
       }
@@ -83,37 +75,37 @@ define-command -hidden split-object-custom %{
     evaluate-commands -save-regs 'CO' %{
       set-register O %sh(printf '%s' "${kak_text%,*}")
       set-register C %sh(printf '%s' "${kak_text#*,}")
-      split-object-balanced "c%val(text)<ret>" "%reg(O)|%reg(C)"
+      split-object "c%val(text)<ret>" "%reg(O)|%reg(C)"
     }
   } -on-abort %{
     info # clear
   }
 }
 
-map global split-object b ': split-object-balanced b [()]<ret>' -docstring 'Parenthesis block'
-map global split-object ( ': split-object-balanced b [()]<ret>' -docstring 'Parenthesis block'
-map global split-object ) ': split-object-balanced b [()]<ret>' -docstring 'Parenthesis block'
+map global split-object b ': split-object b [()]<ret>' -docstring 'Parenthesis block'
+map global split-object ( ': split-object b [()]<ret>' -docstring 'Parenthesis block'
+map global split-object ) ': split-object b [()]<ret>' -docstring 'Parenthesis block'
 
-map global split-object B ': split-object-balanced B [{}]<ret>' -docstring 'Braces block'
-map global split-object { ': split-object-balanced B [{}]<ret>' -docstring 'Braces block'
-map global split-object } ': split-object-balanced B [{}]<ret>' -docstring 'Braces block'
+map global split-object B ': split-object B [{}]<ret>' -docstring 'Braces block'
+map global split-object { ': split-object B [{}]<ret>' -docstring 'Braces block'
+map global split-object } ': split-object B [{}]<ret>' -docstring 'Braces block'
 
-map global split-object r ': split-object-balanced r [\[\]]<ret>' -docstring 'Brackets block'
-map global split-object [ ': split-object-balanced r [\[\]]<ret>' -docstring 'Brackets block'
-map global split-object ] ': split-object-balanced r [\[\]]<ret>' -docstring 'Brackets block'
+map global split-object r ': split-object r [\[\]]<ret>' -docstring 'Brackets block'
+map global split-object [ ': split-object r [\[\]]<ret>' -docstring 'Brackets block'
+map global split-object ] ': split-object r [\[\]]<ret>' -docstring 'Brackets block'
 
-map global split-object a ': split-object-balanced a [<lt><gt>]<ret>' -docstring 'Angle block'
-map global split-object <lt> ': split-object-balanced a [<lt><gt>]<ret>' -docstring 'Angle block'
-map global split-object <gt> ': split-object-balanced a [<lt><gt>]<ret>' -docstring 'Angle block'
+map global split-object a ': split-object a [<lt><gt>]<ret>' -docstring 'Angle block'
+map global split-object <lt> ': split-object a [<lt><gt>]<ret>' -docstring 'Angle block'
+map global split-object <gt> ': split-object a [<lt><gt>]<ret>' -docstring 'Angle block'
 
-map global split-object Q ': split-object-balanced Q %(")<ret>' -docstring 'Double quote string'
-map global split-object '"' ': split-object-balanced Q %(")<ret>' -docstring 'Double quote string'
+map global split-object Q ': split-object Q %(")<ret>' -docstring 'Double quote string'
+map global split-object '"' ': split-object Q %(")<ret>' -docstring 'Double quote string'
 
-map global split-object q ': split-object-balanced q %('')<ret>' -docstring 'Single quote string'
-map global split-object "'" ': split-object-balanced q %('')<ret>' -docstring 'Single quote string'
+map global split-object q ': split-object q %('')<ret>' -docstring 'Single quote string'
+map global split-object "'" ': split-object q %('')<ret>' -docstring 'Single quote string'
 
-map global split-object g ': split-object-balanced g `<ret>' -docstring 'Grave quote string'
-map global split-object ` ': split-object-balanced g `<ret>' -docstring 'Grave quote string'
+map global split-object g ': split-object g `<ret>' -docstring 'Grave quote string'
+map global split-object ` ': split-object g `<ret>' -docstring 'Grave quote string'
 
 map global split-object w ': split-object w \w+<ret>' -docstring 'Word'
 map global split-object <a-w> ': split-object <lt>a-w<gt> \w+<ret>' -docstring 'Big word'
