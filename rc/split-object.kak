@@ -64,6 +64,7 @@ define-command -hidden split-object-implementation -params 3 %{
             exit
           fi
           printf 'set-option -add window split_object_selections %s\n' "$kak_selection_desc"
+          [ "$2" == 's' ] || [ "$2" == 'p' ] || [ "$2" == 'w' ] || [ "$2" == '<lt>a-w<gt>' ] && exit
           printf 'exec ";/<ret>"\nset-option window split_object_close %s\n' "%val{selection_desc}"
         }
       }
