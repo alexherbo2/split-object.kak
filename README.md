@@ -7,17 +7,18 @@
 
 ###### [Usage](#usage) | [Documentation](#modes) | [Contributing](CONTRIBUTING)
 
-> Split object for [Kakoune].
+> Fork of alexherbo2's split object for [Kakoune] with better handling of exceptions.
 
 [![asciicast](https://asciinema.org/a/239870.svg)](https://asciinema.org/a/239870)
 
 ## Installation
 
-### [Pathogen]
+### [Plug]
 
 ``` kak
-pathogen-infect /home/user/repositories/github.com/alexherbo2/split-object.kak
+plug ZakharEl/split-object.kak
 ```
+in kakrc & then in kakoune editor issue the command plug-install
 
 ## Usage
 
@@ -50,4 +51,4 @@ map global normal <a-I> ': enter-user-mode split-object<ret>'
 [IRC Badge]: https://img.shields.io/badge/IRC-%23kakoune-blue.svg
 [Discuss]: https://discuss.kakoune.com/t/ability-to-split-object-selections/442
 [Discuss Badge]: https://img.shields.io/badge/Discuss-442-green.svg
-[Pathogen]: https://github.com/alexherbo2/pathogen.kak
+[Plug]: https://github.com/andreyorst/plug.kak
