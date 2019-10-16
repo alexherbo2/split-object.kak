@@ -8,6 +8,7 @@
 ###### [Usage](#usage) | [Documentation](#modes) | [Contributing](CONTRIBUTING)
 
 > Fork of alexherbo2's split object for [Kakoune] with better handling of exceptions.
+> handles cases where the objects either the objects opening or closing but not both is in the selection 
 
 [![asciicast](https://asciinema.org/a/239870.svg)](https://asciinema.org/a/239870)
 
