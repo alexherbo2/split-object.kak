@@ -1,53 +1,36 @@
-# Split Object
+# split-object.kak
 
-**Status** – _Maintained_ – Until [#138]
-
-[![IRC][IRC Badge]][IRC]
-[![Discuss][Discuss Badge]][Discuss]
-
-###### [Usage](#usage) | [Documentation](#modes) | [Contributing](CONTRIBUTING)
-
-> Split object for [Kakoune].
+Split object for [Kakoune].
 
 [![asciicast](https://asciinema.org/a/239870.svg)](https://asciinema.org/a/239870)
 
 ## Installation
 
-### [Pathogen]
-
-``` kak
-pathogen-infect /home/user/repositories/github.com/alexherbo2/split-object.kak
-```
+Add [`split-object.kak`](rc/split-object.kak) to your autoload or source it manually.
 
 ## Usage
+
+Select a region and enter split-object mode with `enter-user-mode split-object`.
+
+## Configuration
 
 ``` kak
 map global normal <a-I> ': enter-user-mode split-object<ret>'
 ```
 
-## Modes
-
-- `split-object`
-
 ## Objects
 
-- `b`, `(`, `)`: Parenthesis block
-- `B`, `{`, `}`: Braces block
-- `r`, `[`, `]`: Brackets block
-- `a`, `<`, `>`: Angle block
-- `Q`, `"`: Double quote string
-- `q`, `'`: Single quote string
-- `g`, `` ` ``: Grave quote string
-- `w`: Word
-- `<a-w>`: Big word
-- `s`: Sentence
-- `p`: Paragraph
-- `c`: Custom object description
+- <kbd>b</kbd>, <kbd>(</kbd>, <kbd>)</kbd>: Parenthesis block
+- <kbd>B</kbd>, <kbd>{</kbd>, <kbd>}</kbd>: Braces block
+- <kbd>r</kbd>, <kbd>[</kbd>, <kbd>]</kbd>: Brackets block
+- <kbd>a</kbd>, <kbd>&lt;</kbd>, <kbd>&gt;</kbd>: Angle block
+- <kbd>Q</kbd>, <kbd>"</kbd>: Double quote string
+- <kbd>q</kbd>, <kbd>'</kbd>: Single quote string
+- <kbd>g</kbd>, <kbd>`</kbd>: Grave quote string
+- <kbd>w</kbd>: Word
+- <kbd>Alt</kbd> + <kbd>w</kbd>: WORD
+- <kbd>s</kbd>: Sentence
+- <kbd>p</kbd>: Paragraph
+- <kbd>c</kbd>: Custom object description
 
-[#138]: https://github.com/mawww/kakoune/issues/138
 [Kakoune]: https://kakoune.org
-[IRC]: https://webchat.freenode.net/#kakoune
-[IRC Badge]: https://img.shields.io/badge/IRC-%23kakoune-blue.svg
-[Discuss]: https://discuss.kakoune.com/t/ability-to-split-object-selections/442
-[Discuss Badge]: https://img.shields.io/badge/Discuss-442-green.svg
-[Pathogen]: https://github.com/alexherbo2/pathogen.kak
