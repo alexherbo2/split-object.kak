@@ -11,38 +11,38 @@ provide-module split-object %{
 
   # Mappings ───────────────────────────────────────────────────────────────────
 
-  map global split-object b ': split-object-balanced b [()]<ret>' -docstring 'Parenthesis block'
-  map global split-object ( ': split-object-balanced b [()]<ret>' -docstring 'Parenthesis block'
-  map global split-object ) ': split-object-balanced b [()]<ret>' -docstring 'Parenthesis block'
+  map -docstring 'Parenthesis block' global split-object b ': split-object-balanced b [()]<ret>'
+  map -docstring 'Parenthesis block' global split-object ( ': split-object-balanced b [()]<ret>'
+  map -docstring 'Parenthesis block' global split-object ) ': split-object-balanced b [()]<ret>'
 
-  map global split-object B ': split-object-balanced B [{}]<ret>' -docstring 'Braces block'
-  map global split-object { ': split-object-balanced B [{}]<ret>' -docstring 'Braces block'
-  map global split-object } ': split-object-balanced B [{}]<ret>' -docstring 'Braces block'
+  map -docstring 'Braces block' global split-object B ': split-object-balanced B [{}]<ret>'
+  map -docstring 'Braces block' global split-object { ': split-object-balanced B [{}]<ret>'
+  map -docstring 'Braces block' global split-object } ': split-object-balanced B [{}]<ret>'
 
-  map global split-object r ': split-object-balanced r [\[\]]<ret>' -docstring 'Brackets block'
-  map global split-object [ ': split-object-balanced r [\[\]]<ret>' -docstring 'Brackets block'
-  map global split-object ] ': split-object-balanced r [\[\]]<ret>' -docstring 'Brackets block'
+  map -docstring 'Brackets block' global split-object r ': split-object-balanced r [\[\]]<ret>'
+  map -docstring 'Brackets block' global split-object [ ': split-object-balanced r [\[\]]<ret>'
+  map -docstring 'Brackets block' global split-object ] ': split-object-balanced r [\[\]]<ret>'
 
-  map global split-object a ': split-object-balanced a [<lt><gt>]<ret>' -docstring 'Angle block'
-  map global split-object <lt> ': split-object-balanced a [<lt><gt>]<ret>' -docstring 'Angle block'
-  map global split-object <gt> ': split-object-balanced a [<lt><gt>]<ret>' -docstring 'Angle block'
+  map -docstring 'Angle block' global split-object a ': split-object-balanced a [<lt><gt>]<ret>'
+  map -docstring 'Angle block' global split-object <lt> ': split-object-balanced a [<lt><gt>]<ret>'
+  map -docstring 'Angle block' global split-object <gt> ': split-object-balanced a [<lt><gt>]<ret>'
 
-  map global split-object Q ': split-object-balanced Q %(")<ret>' -docstring 'Double quote string'
-  map global split-object '"' ': split-object-balanced Q %(")<ret>' -docstring 'Double quote string'
+  map -docstring 'Double quote string' global split-object Q ': split-object-balanced Q %(")<ret>'
+  map -docstring 'Double quote string' global split-object '"' ': split-object-balanced Q %(")<ret>'
 
-  map global split-object q ': split-object-balanced q %('')<ret>' -docstring 'Single quote string'
-  map global split-object "'" ': split-object-balanced q %('')<ret>' -docstring 'Single quote string'
+  map -docstring 'Single quote string' global split-object q ': split-object-balanced q %('')<ret>'
+  map -docstring 'Single quote string' global split-object "'" ': split-object-balanced q %('')<ret>'
 
-  map global split-object g ': split-object-balanced g `<ret>' -docstring 'Grave quote string'
-  map global split-object ` ': split-object-balanced g `<ret>' -docstring 'Grave quote string'
+  map -docstring 'Grave quote string' global split-object g ': split-object-balanced g `<ret>'
+  map -docstring 'Grave quote string' global split-object ` ': split-object-balanced g `<ret>'
 
-  map global split-object w ': split-object w \w+<ret>' -docstring 'Word'
-  map global split-object <a-w> ': split-object <lt>a-w<gt> \w+<ret>' -docstring 'WORD'
+  map -docstring 'Word' global split-object w ': split-object w \w+<ret>'
+  map -docstring 'WORD' global split-object <a-w> ': split-object <lt>a-w<gt> \w+<ret>'
 
-  map global split-object s ': split-object s [^\n]+<ret>' -docstring 'Sentence'
-  map global split-object p ': split-object p [^\n]+<ret>' -docstring 'Paragraph'
+  map -docstring 'Sentence' global split-object s ': split-object s [^\n]+<ret>'
+  map -docstring 'Paragraph' global split-object p ': split-object p [^\n]+<ret>'
 
-  map global split-object c ': split-object-prompt<ret>' -docstring 'Custom object description'
+  map -docstring 'Custom object description' global split-object c ': split-object-prompt<ret>'
 
   # Commands ───────────────────────────────────────────────────────────────────
 
