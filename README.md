@@ -8,6 +8,10 @@ Split object for [Kakoune].
 
 Add [`split-object.kak`](rc/split-object.kak) to your autoload or source it manually.
 
+``` kak
+require-module split-object
+```
+
 ## Usage
 
 Select a region and enter split-object mode with `enter-user-mode split-object`.

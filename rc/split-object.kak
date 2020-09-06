@@ -148,5 +148,3 @@ provide-module split-object %{
     execute-keys 'l'
   }
 }
-
-require-module split-object
