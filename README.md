@@ -1,6 +1,6 @@
 # split-object.kak
 
-Split object for [Kakoune].
+[Kakoune] plugin adding the ability to split object selections.
 
 [![asciicast](https://asciinema.org/a/239870.svg)](https://asciinema.org/a/239870)
 
