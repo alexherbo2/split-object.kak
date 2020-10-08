@@ -2,6 +2,8 @@
 
 [Kakoune] plugin adding the ability to split object selections.
 
+[Kakoune]: https://kakoune.org
+
 [![asciicast](https://asciinema.org/a/239870.svg)](https://asciinema.org/a/239870)
 
 ## Installation
@@ -36,5 +38,3 @@ map global normal <a-I> ': enter-user-mode split-object<ret>'
 - <kbd>s</kbd>: Sentence
 - <kbd>p</kbd>: Paragraph
 - <kbd>c</kbd>: Custom object description
-
-[Kakoune]: https://kakoune.org
