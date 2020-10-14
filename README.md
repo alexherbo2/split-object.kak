@@ -21,7 +21,7 @@ Select a region and enter split-object mode with `enter-user-mode split-object`.
 ## Configuration
 
 ``` kak
-map -docstring 'Split object' global normal <a-I> ': enter-user-mode split-object<ret>'
+map -docstring 'Split object' global prompt <a-i> '<esc>: enter-user-mode split-object<ret>'
 ```
 
 ## Objects
