@@ -20,6 +20,8 @@ Select a region and enter split-object mode with `enter-user-mode split-object`.
 
 ## Configuration
 
+Add text objects to the <kbd>s</kbd> command:
+
 ``` kak
 map -docstring 'Split object' global prompt <a-i> '<esc>: enter-user-mode split-object<ret>'
 ```
