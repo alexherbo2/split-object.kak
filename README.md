@@ -35,6 +35,10 @@ map -docstring 'Split object' global prompt <a-i> '<esc>: enter-user-mode split-
 - <kbd>Q</kbd>, <kbd>"</kbd>: Double quote string
 - <kbd>q</kbd>, <kbd>'</kbd>: Single quote string
 - <kbd>g</kbd>, <kbd>`</kbd>: Grave quote string
+- <kbd>Alt</kbd> + <kbd>Q</kbd>: Double quotation mark
+- <kbd>Alt</kbd> + <kbd>q</kbd>: Single quotation mark
+- <kbd>Alt</kbd> + <kbd>G</kbd>: Double angle quotation mark
+- <kbd>Alt</kbd> + <kbd>g</kbd>: Single angle quotation mark
 - <kbd>w</kbd>: Word
 - <kbd>Alt</kbd> + <kbd>w</kbd>: WORD
 - <kbd>s</kbd>: Sentence

@@ -36,6 +36,12 @@ provide-module split-object %{
   map -docstring 'Grave quote string' global split-object g ': split-object-balanced g `<ret>'
   map -docstring 'Grave quote string' global split-object ` ': split-object-balanced g `<ret>'
 
+  # Custom quotation marks
+  map -docstring 'Double quotation mark' global split-object <a-Q> ': split-object-prompt<ret>“,”<ret>'
+  map -docstring 'Single quotation mark' global split-object <a-q> ': split-object-prompt<ret>‘,’<ret>'
+  map -docstring 'Double angle quotation mark' global split-object <a-G> ': split-object-prompt<ret>«,»<ret>'
+  map -docstring 'Single angle quotation mark' global split-object <a-g> ': split-object-prompt<ret>‹,›<ret>'
+
   map -docstring 'Word' global split-object w ': split-object w \w+<ret>'
   map -docstring 'WORD' global split-object <a-w> ': split-object <lt>a-w<gt> \w+<ret>'
 
